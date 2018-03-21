@@ -12,6 +12,9 @@
 		E545CA151FF3E17A005737A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E545CA131FF3E17A005737A9 /* Main.storyboard */; };
 		E545CA171FF3E17A005737A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E545CA161FF3E17A005737A9 /* Assets.xcassets */; };
 		E545CA1A1FF3E17A005737A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E545CA181FF3E17A005737A9 /* LaunchScreen.storyboard */; };
+		E5FE6A6E20628C1200214470 /* iosCashfreeSdk.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = E5FE6A6C20628C1100214470 /* iosCashfreeSdk.framework.dSYM */; };
+		E5FE6A6F20628C1B00214470 /* iosCashfreeSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FE6A6B20628C1100214470 /* iosCashfreeSdk.framework */; };
+		E5FE6A7020628C1B00214470 /* iosCashfreeSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E5FE6A6B20628C1100214470 /* iosCashfreeSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -21,6 +24,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E5FE6A7020628C1B00214470 /* iosCashfreeSdk.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -35,6 +39,8 @@
 		E545CA161FF3E17A005737A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E545CA191FF3E17A005737A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E545CA1B1FF3E17A005737A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5FE6A6B20628C1100214470 /* iosCashfreeSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iosCashfreeSdk.framework; path = SdkForDevice/iosCashfreeSdk.framework; sourceTree = SOURCE_ROOT; };
+		E5FE6A6C20628C1100214470 /* iosCashfreeSdk.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = iosCashfreeSdk.framework.dSYM; path = SdkForDevice/iosCashfreeSdk.framework.dSYM; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5FE6A6F20628C1B00214470 /* iosCashfreeSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +88,8 @@
 		E545CA631FF3E4CD005737A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E5FE6A6B20628C1100214470 /* iosCashfreeSdk.framework */,
+				E5FE6A6C20628C1100214470 /* iosCashfreeSdk.framework.dSYM */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -147,6 +156,7 @@
 			files = (
 				E545CA1A1FF3E17A005737A9 /* LaunchScreen.storyboard in Resources */,
 				E545CA171FF3E17A005737A9 /* Assets.xcassets in Resources */,
+				E5FE6A6E20628C1200214470 /* iosCashfreeSdk.framework.dSYM in Resources */,
 				E545CA151FF3E17A005737A9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +311,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/SdkForDevice",
 				);
 				INFOPLIST_FILE = ExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -321,6 +332,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/SdkForDevice",
 				);
 				INFOPLIST_FILE = ExampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

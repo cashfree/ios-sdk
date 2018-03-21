@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     let customerPhone = "9876543210"
     let orderNote = "This is a test note" // Pass "" if you don't have a value.
     let customerName = "Firstname Lastname"
+    let orderCurrency = "INR"
     
     var paymentReady = "" // MUST BE A VAR with the value ""
     // End of Step 2
@@ -54,7 +55,7 @@ class ViewController: UIViewController {
         let paymentVC = mainView.instantiateViewController(withIdentifier: "PGTabBar") as! PGTabBarViewController
         
         let payTab = PGTabBarViewController()
-        payTab.createOrder(env: environment, url: url, merchantName: merchantName, appId: appId, orderId: orderId, orderAmount: orderAmount, customerEmail: customerEmail, customerPhone: customerPhone, paymentReady: paymentReady, orderNote: orderNote, customerName: customerName, color1Hex: color1Hex, color2Hex: color2Hex)
+        payTab.createOrder(env: environment, url: url, merchantName: merchantName, appId: appId, orderId: orderId, orderAmount: orderAmount, customerEmail: customerEmail, customerPhone: customerPhone, paymentReady: paymentReady, orderNote: orderNote, customerName: customerName, color1Hex: color1Hex, color2Hex: color2Hex, orderCurrency: orderCurrency)
         
         self.present(paymentVC, animated: false, completion: nil)
     }
@@ -67,7 +68,7 @@ class ViewController: UIViewController {
         // MARK: Step 4 Call the initPayment method on "viewDidLoad()"
         let cf = cardViewController()
         
-        _ = cf.initPayment(url: url, appId: appId, orderId: orderId, orderAmount: orderAmount, customerEmail: customerEmail, customerPhone: customerPhone, completion: { output in
+        _ = cf.initPayment(url: url, appId: appId, orderId: orderId, orderAmount: orderAmount, customerEmail: customerEmail, customerPhone: customerPhone, orderCurrency: orderCurrency, completion: { output in
             self.paymentReady = (output)
         })
         
