@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H22-xx-tDq">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ExampleApp_CFWebSdk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8BC-nV-QmJ">
+                                <rect key="frame" x="115" y="86" width="145" height="30"/>
+                                <state key="normal" title="Webview Checkout"/>
+                                <connections>
+                                    <action selector="payButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="il5-5S-UgF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZv-2l-AmY">
+                                <rect key="frame" x="106" y="304" width="163" height="30"/>
+                                <state key="normal" title="Seamless Pro Checkout"/>
+                                <connections>
+                                    <action selector="SeamlessProBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jbd-ge-hZj"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7OV-xr-vzo">
+                                <rect key="frame" x="16" y="133" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Card Holder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xLq-IS-aQf">
+                                <rect key="frame" x="16" y="182" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CRr-kF-Hrk">
+                                <rect key="frame" x="16" y="235" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="mLy-13-uFM"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CVV" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yeG-Bp-wT8">
+                                <rect key="frame" x="262" y="235" width="97" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="YY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4dO-5d-1JT">
+                                <rect key="frame" x="139" y="235" width="97" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xLq-IS-aQf" firstAttribute="leading" secondItem="CRr-kF-Hrk" secondAttribute="leading" id="6Up-or-VNB"/>
+                            <constraint firstItem="8BC-nV-QmJ" firstAttribute="centerX" secondItem="7OV-xr-vzo" secondAttribute="centerX" id="6h5-J1-Pkk"/>
+                            <constraint firstItem="8BC-nV-QmJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="115" id="8O9-tM-OxO"/>
+                            <constraint firstItem="4dO-5d-1JT" firstAttribute="centerX" secondItem="EZv-2l-AmY" secondAttribute="centerX" id="B3j-CG-9Dk"/>
+                            <constraint firstItem="8BC-nV-QmJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="BLm-oe-XXx"/>
+                            <constraint firstItem="CRr-kF-Hrk" firstAttribute="baseline" secondItem="4dO-5d-1JT" secondAttribute="baseline" id="H66-bc-93W"/>
+                            <constraint firstItem="4dO-5d-1JT" firstAttribute="leading" secondItem="CRr-kF-Hrk" secondAttribute="trailing" constant="26" id="JzY-6f-RCn"/>
+                            <constraint firstItem="xLq-IS-aQf" firstAttribute="top" secondItem="7OV-xr-vzo" secondAttribute="bottom" constant="19" id="UYx-Wh-Riv"/>
+                            <constraint firstItem="yeG-Bp-wT8" firstAttribute="leading" secondItem="4dO-5d-1JT" secondAttribute="trailing" constant="26" id="UbV-XS-yjs"/>
+                            <constraint firstItem="EZv-2l-AmY" firstAttribute="top" secondItem="CRr-kF-Hrk" secondAttribute="bottom" constant="39" id="Wkb-Yr-dBr"/>
+                            <constraint firstItem="xLq-IS-aQf" firstAttribute="trailing" secondItem="yeG-Bp-wT8" secondAttribute="trailing" id="XrG-vj-blo"/>
+                            <constraint firstItem="7OV-xr-vzo" firstAttribute="leading" secondItem="xLq-IS-aQf" secondAttribute="leading" id="aSi-cG-IyG"/>
+                            <constraint firstItem="CRr-kF-Hrk" firstAttribute="top" secondItem="xLq-IS-aQf" secondAttribute="bottom" constant="23" id="abD-Jr-Xee"/>
+                            <constraint firstItem="7OV-xr-vzo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="eDM-FR-WFw"/>
+                            <constraint firstItem="8BC-nV-QmJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mil-Ao-ORa"/>
+                            <constraint firstItem="xLq-IS-aQf" firstAttribute="centerX" secondItem="4dO-5d-1JT" secondAttribute="centerX" id="pkm-xa-8OJ"/>
+                            <constraint firstItem="7OV-xr-vzo" firstAttribute="top" secondItem="8BC-nV-QmJ" secondAttribute="bottom" constant="17" id="t0y-tX-u14"/>
+                            <constraint firstItem="4dO-5d-1JT" firstAttribute="baseline" secondItem="yeG-Bp-wT8" secondAttribute="baseline" id="w73-LW-QcK"/>
+                            <constraint firstItem="7OV-xr-vzo" firstAttribute="trailing" secondItem="xLq-IS-aQf" secondAttribute="trailing" id="xye-Ae-LeO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aO8-pF-zxj"/>
+                    <connections>
+                        <outlet property="cardHolderTextbox" destination="xLq-IS-aQf" id="nTA-S7-eeP"/>
+                        <outlet property="cardNumberTextbox" destination="7OV-xr-vzo" id="fXk-UT-KvP"/>
+                        <outlet property="cvvCodeTextbox" destination="yeG-Bp-wT8" id="9GX-YU-nov"/>
+                        <outlet property="expiryMonthTextbox" destination="CRr-kF-Hrk" id="w7y-ki-AsS"/>
+                        <outlet property="expiryYearTextbox" destination="4dO-5d-1JT" id="W1u-EE-iZG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="992.79999999999995" y="27.436281859070466"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YJO-ai-pn1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H22-xx-tDq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Fcm-pe-tX7">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Iz6-wS-gA2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WEf-di-Ep6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="244" y="-670.61469265367316"/>
+        </scene>
+    </scenes>
+</document>
