@@ -9,51 +9,40 @@
 import UIKit
 import iosCashfreeSdk
 
-// Use the ResultDelegate ONLY if you want to use Individual payment views (Not required by Tab Bar View)
-class ViewController: UIViewController, ResultDelegate {
+class ViewController: UIViewController {
     
     // MARK: Step 1 - Set Variables (MUST NOT BE EMPTY)
-    // Note - Please add the 3 keys (without the qoutes) in your project's "info.plist" file and set correct value for them
-
-    // If you are testing in development, please set value of "CF_ENV" as "TEST" (without qoutes) in your project's Info.plist file.
-    // Else if you are building your app for Production (Appstore), please set the value of "CF_ENV" to "PROD" (without qoutes) in your project's Info.plist file.
+    let source_config = "iossdk" //MUST be "iossdk"
+    let environment = "TEST"
+    let appId = "YOUR-APP-ID"
+    let color1Hex = "#6a5594ff"
+    let merchantName = "YOUR-MERCHANT-NAME"
+    let notifyUrl = "YOUR-HTTPS-NOTIFY-URL"
     
-    let environment = Bundle.main.infoDictionary?["CF_ENV"] as! String  // MUST NOT BE EMPTY
-    
-    let url = Bundle.main.infoDictionary?["CF_URL"] as! String // MUST NOT BE NIL
-    let appId = Bundle.main.infoDictionary?["CF_API_KEY"] as! String // MUST NOT BE NIL
-    let merchantName = Bundle.main.infoDictionary?["CF_MERCHANT_NAME"] as! String // MUST NOT BE NIL
-    let notifyUrl = Bundle.main.infoDictionary?["CF_NOTIFYURL"] as! String // MUST NOT BE NIL
-    
-    let walletArray = ["amazonpay","phonepe","paytm","airtel","freecharge","jio","mobikwik","ola"] // MUST NOT BE NIL
-    
-    let tezOption = Bundle.main.infoDictionary?["CF_TEZ"] as! String // MUST NOT BE NIL
-    // End of Step 1
-    
-    
-    // MARK: Step 2 - Pass your variables (Eg: orderId, orderAmount etc)
-    
-    let orderId = "Xorder_idx12345" + String(arc4random())
-    let orderAmount = "102.00"
-    let customerEmail = "yourname@example.com"
+    let orderId = "mobile-test1001"
+    let orderAmount = "52"
+    let customerEmail = "ionictester@email.com"
     let customerPhone = "9876543210"
-    let orderNote = "This is a test note" // Pass "" if you don't have a value.
-    let customerName = "Firstname Lastname"
-    let orderCurrency = "INR"
+    let orderNote = "This is a test note"
+    let customerName = "John Doe"
     
-    var paymentReady = "" // MUST BE A VAR with the value ""
-    // End of Step 2
+    let paymentReady = "Tt9JCN4MzUIJiOicGbhJCLiQ1VKJiOiAXe0Jye.dz9JSMhJTMyITYyY2N1MWNiojI0xWYz9lIsgTMyEzNykDN1EjOiAHelJCLiIlTJJiOik3YuVmcyV3QyVGZy9mIsIiM1IiOiQnb19WbBJXZkJ3biwiIxADMxQ3clRXLlxWai9WbiojIklkclRmcvJye.sURzYR3umo8MjVyNJjNrROkh-zlOm5JEmOqf7H2biTY0l7Q3TiwZxT7V4CjtMhsy7-"
     
-    // Customize colors
+    // WEBVIEW CHECKOUT you can provide paymentModes to show on cashfree payment page. Eg: cc, dc, nb, paypal etc
+    let paymentModes = ""
     
-    // Use below values for color1Hex and color2Hex if you want to use our example
-    // let color1Hex = 255fdb
-    // let color2Hex = 00ff6b
+    // Below are required in SEAMLESS PRO Integration
+    // Available values: card, nb, wallet, upi
+    let paymentOption = "card"
     
-    let color1Hex = "7d559f"
-    let color2Hex = "de97ec"
+    // Required if using paymentOption nb or wallet. Eg: "3333" for nb Test Bank. "4001" or "4002" for Wallet.
+    let paymentCode = ""
     
-    // End Customize colors
+    // Required if using paymentOption upi. "testsuccess@gocash"
+    let upiVpa = ""
+    
+    // Required if you need to use googlepay use "gpay". The number provided in customerPhone will receive googlepay request.
+    let upiMode = ""
     
     // This is Struct for the result (See viewDidAppear)
     struct Result : Codable {
@@ -77,172 +66,82 @@ class ViewController: UIViewController, ResultDelegate {
             case signature
         }
     }
-    
     // End of Struct for the result
     
-    // USE ANY OF THE BELOW IBAction Codes (We recommend using the payTabBarButton which shows all Payment methods in a Tab Bar Controller)
-    
-    // MARK: To present Only a Card Payment View
-    @IBAction func cardButton(_ sender: Any) {
-        
-        let myBundle = Bundle(for: cardViewController.self)
-        let mainView: UIStoryboard = UIStoryboard(name: "CF", bundle: myBundle)
-        let cardVC = mainView.instantiateViewController(withIdentifier: "cardVC") as! cardViewController
-        
-        cardVC.resultDelegate = self
-        
-        cardVC.appId = appId
-        cardVC.merchantName = merchantName
-        cardVC.orderId = orderId
-        cardVC.orderAmount = orderAmount
-        cardVC.customerEmail = customerEmail
-        cardVC.customerPhone = customerPhone
-        cardVC.paymentToken_config = paymentReady
-        
-        self.present(cardVC, animated: true, completion: nil)
+    // Example IBAction for WEBVIEW CHECKOUT pay button
+    @IBAction func payButton(_ sender: Any) {
+        // Use below code If you need WEBVIEW CHECKOUT
+        let CF = CFViewController()
+        if paymentReady != "" {
+            CF.createOrder(orderId: orderId, orderAmount: orderAmount, customerEmail: customerEmail, customerPhone: customerPhone, paymentReady: paymentReady, orderNote: orderNote, customerName: customerName, notifyUrl: notifyUrl, paymentModes: paymentModes)
+            
+            self.navigationController?.pushViewController(CF, animated: true)
+        } else {
+            print("paymentReady is empty")
+        }
     }
-    // End of Only Showing Card Payment
     
-    // MARK: To present Only a Netbanking
-    @IBAction func netbankingButton(_ sender: Any) {
-    
-        let myBundle = Bundle(for: cardViewController.self)
-        let mainView: UIStoryboard = UIStoryboard(name: "CF", bundle: myBundle)
+    // Example IBAction for SEAMLESS PRO pay button
+    @IBAction func SeamlessProBtn(_ sender: Any) {
+        // Use this only if you have SEAMLESS PRO enabled at Cashfree
+        let CF = SeamlessProVC()
+        let paymentParams = [
+            "orderId": orderId,
+            "orderAmount": orderAmount,
+            "customerName": customerName,
+            "orderNote": orderNote,
+            "customerPhone": customerPhone,
+            "customerEmail": customerEmail,
+            "paymentOption": paymentOption,
+            "notifyUrl": notifyUrl,
+            "source": source_config,
+            //If you don't pass the below key:values then it will not be sent in the request.
+            "card_number": "",
+            "card_holder": "",
+            "card_expiryMonth": "",
+            "card_expiryYear": "",
+            "card_cvv": "",
+            "paymentCode": paymentCode,
+            "upi_vpa": upiVpa,
+            "upiMode": upiMode,
+            "paymentReady": paymentReady
+        ]
         
-        let nbVC = mainView.instantiateViewController(withIdentifier: "nbVC") as! netBankingViewController
-        
-        nbVC.resultDelegate = self
-        
-        nbVC.appId = appId
-        nbVC.merchantName = merchantName
-        nbVC.orderId = orderId
-        nbVC.orderAmount = orderAmount
-        nbVC.customerEmail = customerEmail
-        nbVC.customerPhone = customerPhone
-        nbVC.nb_paymentToken_config = paymentReady
-        
-        self.present(nbVC, animated: true, completion: nil)
-        
-        
+        CF.createOrderParams(paymentParams: paymentParams)
+        self.navigationController?.pushViewController(CF, animated: true)
     }
-    // End of Only Showing Netbanking
-    
-    // MARK: To present Only a Wallet
-    @IBAction func walletButton(_ sender: Any) {
-        
-        let myBundle = Bundle(for: cardViewController.self)
-        let mainView: UIStoryboard = UIStoryboard(name: "CF", bundle: myBundle)
-        
-        let walletVC = mainView.instantiateViewController(withIdentifier: "walletVC") as! walletViewController
-        
-        walletVC.resultDelegate = self
-        
-        walletVC.appId = appId
-        walletVC.merchantName = merchantName
-        walletVC.orderId = orderId
-        walletVC.orderAmount = orderAmount
-        walletVC.customerEmail = customerEmail
-        walletVC.customerPhone = customerPhone
-        walletVC.wallet_paymentToken_config = paymentReady
-        
-        self.present(walletVC, animated: true, completion: nil)
-    }
-    // End of Only Showing Wallet
-    
-    // MARK: To present Only a UPI
-    @IBAction func upiButton(_ sender: Any) {
-        let myBundle = Bundle(for: cardViewController.self)
-        let mainView: UIStoryboard = UIStoryboard(name: "CF", bundle: myBundle)
-        
-        let upiVC = mainView.instantiateViewController(withIdentifier: "upiVC") as! upiViewController
-        
-        upiVC.resultDelegate = self
-        
-        upiVC.appId = appId
-        upiVC.merchantName = merchantName
-        upiVC.orderId = orderId
-        upiVC.orderAmount = orderAmount
-        upiVC.customerEmail = customerEmail
-        upiVC.customerPhone = customerPhone
-        upiVC.upi_paymentToken_config = paymentReady
-        
-        self.present(upiVC, animated: true, completion: nil)
-    }
-    // End of Only Showing UPI
-    
-    // MARK: To present all Payment Options in a Tab Bar Controller
-    @IBAction func payTabBarButton(_ sender: Any) {
-        
-        let myBundle = Bundle(for: PGTabBarViewController.self)
-        let mainView: UIStoryboard = UIStoryboard(name: "CF", bundle: myBundle)
-        
-        let paymentVC = mainView.instantiateViewController(withIdentifier: "PGTabBar") as! PGTabBarViewController
-        
-        let payTab = PGTabBarViewController()
-
-        // CREATE AN ORDER
-        payTab.createOrder(orderId: orderId, orderAmount: orderAmount, customerEmail: customerEmail, customerPhone: customerPhone, paymentReady: paymentReady, orderNote: orderNote, customerName: customerName, orderCurrency: orderCurrency, notifyUrl: notifyUrl)
-        
-        self.present(paymentVC, animated: false, completion: nil)
-    }
-    // End of Showing all Payment Options in a Tab Bar Controller
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: Step 3
-        let payTab = PGTabBarViewController()
+        // Use below code If you need WebView Checkout
+        let CF = CFViewController();
         
-        payTab.setConfig(env: environment, appId: appId, url: url, merchantName: merchantName, walletArray: walletArray, tezOption: tezOption, color1Hex: color1Hex, color2Hex: color2Hex)
+        // Use below SeamlessProVC ONLY if you have SEAMLESS PRO enabled at Cashfree
+//        let CF = SeamlessProVC();
         
-        // End of Step 3
-        
-        // MARK: Step 4 Call the initPayment method on "viewDidLoad()"
-        let cf = cardViewController()
-        
-        _ = cf.initPayment(url: url, appId: appId, orderId: orderId, orderAmount: orderAmount, customerEmail: customerEmail, customerPhone: customerPhone, orderCurrency: orderCurrency, completion: { output in
-            self.paymentReady = (output)
-        })
-        // End of Step 4
+        CF.setConfig(env: environment, appId: appId)
     }
-    
     
     // MARK: Step 5 - Below function is used for Tab Bar Controller contains the result after payment is completed by the user.
-    
     override func viewDidAppear(_ animated: Bool) {
-        let paymentVC = PGTabBarViewController()
-        
-        var transactionResult = paymentVC.getResult()
-        var inputJSON = "\(transactionResult)"
-        
+        let paymentVC = CFViewController()
+        let transactionResult = paymentVC.getResult()
+        let inputJSON = "\(transactionResult)"
         let inputData = inputJSON.data(using: .utf8)!
         let decoder = JSONDecoder()
-        
         if inputJSON != "" {
             do {
-                let result = try decoder.decode(Result.self, from: inputData)
-                print(result.orderId)
-                print(result)
+                let result2 = try decoder.decode(Result.self, from: inputData)
+                print(result2.orderId)
+                print(result2)
             } catch {
                 // handle exception
-                print("Error Occured")
+                print("BDEBUG: Error Occured while retrieving transaction response")
             }
         } else {
-            print("transactionResult is empty")
+            print("BDEBUG: transactionResult is empty")
         }
     }
-    // End of function that contains the result after payment is completed by the user.
-    
-
-    
-    // NOTE - Only If you are using Individual View (eg: Only Card Payment View), Use this function which contains the result after payment is completed by the user in a individual payment method view (Eg: Only Card Payment View).
-    // This is a protocol stub for "ResultDelegate"
-    
-    func onPaymentCompletion(msg: String) {
-        print("Payment completion details are - \(msg)")
-    }
-    // End of Step 5
-
 }
-
